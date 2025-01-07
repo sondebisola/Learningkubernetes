@@ -18,3 +18,7 @@ CNI plugins include Calico, Flannel, and Weave Net.
 CNI provides a common standard for network plugins so that container runtimes (Docker,ContainerD or CRI-O,) and orchestration systems can work with any networking solution that supports the CNI API.
 CNI is used by the kubelet to configure the network interfaces of pods. When a pod is created, the kubelet invokes the CNI plugin to configure the pod’s network. 
 The CNI plugin then creates and configures the network interfaces for the pod, sets up any necessary routing rules, and adds the pod’s IP address to the appropriate network namespace.
+
+# CNI FOR Containerd .....https://github.com/containerd/containerd/blob/main/script/setup/install-cni
+ # CNI FOR CRI-O .......https://github.com/cri-o/cri-o/blob/main/contrib/cni/README.md
+
