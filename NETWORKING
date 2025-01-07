@@ -1,0 +1,20 @@
+kube-proxy, which is responsible for load balancing network traffic across multiple pods, 
+Service object, which provides a stable IP address and DNS name for a set of pods.
+Ingress is an API object that exposes HTTP and HTTPs allowing external access to services in a cluster. defines a set of rules that specify how incoming traffic should be routed to the appropriate service, based on the incoming request’s host and path.
+Domain Name System (DNS) is used to provide a way for services and pods to discover and communicate with each other. It is a service that is responsible for translating or resolving a service name to its IP address
+DNS Format: servicename.namespace.svc.cluster.local, where servicename is the name of the service,namespace is the Kubernetes namespace in which the service is running, cluster.local is the default DNS domain for the cluster.
+Probes promote self-healing and auto-scaling capabilities,Probes are used to detect the state of a container.
+      Readiness Probe :This type of probe is used to determine if a container is ready to start receiving traffic
+      Liveness Probe: used to determine if a container is still running and is healthy. 
+      Startup Probe: used to determine if a container is in the process of starting up. 
+Netfilter: used to implement network policies, which are used to control the flow of network traffic between pods in a cluster.
+Network plugin generates Netfilter rules based on the selectors specified in the network policy and then applies the action specified in the policy to the matching packets., it is responsible for configuring the networking rule .
+kube-proxy creates IPTables rules to enforce the  network policy. Kube-Proxy listens for changes to Services and then updates the local IPTables or IPVS rules accordingly. 
+Envoy can be used as a replacement for Kube-Proxy. Envoy provides load-balancing algorithms, circuit breaking, and distributed tracing.Envoy is a high-performance proxy that provides advanced traffic management and load-balancing capabilities.
+IPTables are used to implement network policies, which control the flow of traffic between pods and services.
+IPVS (IP Virtual Server) is a Linux kernel module  used to create a virtual IP address (VIP) that provides network load-balancing capabilities for Service type  “LoadBalancer”. IPVS is used as an alternative to kube-proxy and IPTables for implementing Services.
+IPVS is optimized for high throughput,low latency, advanced load-balancing features such as session persistence and connection draining.
+CNI plugins include Calico, Flannel, and Weave Net.
+CNI provides a common standard for network plugins so that container runtimes (Docker,ContainerD or CRI-O,) and orchestration systems can work with any networking solution that supports the CNI API.
+CNI is used by the kubelet to configure the network interfaces of pods. When a pod is created, the kubelet invokes the CNI plugin to configure the pod’s network. 
+The CNI plugin then creates and configures the network interfaces for the pod, sets up any necessary routing rules, and adds the pod’s IP address to the appropriate network namespace.
