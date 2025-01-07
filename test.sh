@@ -1,5 +1,5 @@
-Kubernetes Setup Using Kubeadm In AWS EC2 Ubuntu Servers.
-    Prerequisite
+# Kubernetes Setup Using Kubeadm In AWS EC2 Ubuntu Servers.
+  ##  Prerequisite
 
 AWS Acccount.
     Create 3 - Ubuntu Servers -- 18.04.
@@ -28,11 +28,7 @@ sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
 
 #3) Add  kernel settings & Enable IP tables(CNI Prerequisites)
  #A Container Runtime, in the networking context, is a daemon on a node configured to provide CRI Services for kubelet.
- # CNI FOR Containerd .....https://github.com/containerd/containerd/blob/main/script/setup/install-cni
-  # CNI FOR CRI-O .......https://github.com/cri-o/cri-o/blob/main/contrib/cni/README.md
-# kube-proxy, which is responsible for load balancing network traffic across multiple pod
-#Service object, which provides a stable IP address and DNS name for a set of pods.
-  Calico, Flannel, and Weave Net..Kubernetes network plugin  assign  IP address TO EACH pOD
+
 cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
