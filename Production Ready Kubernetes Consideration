@@ -1,0 +1,56 @@
+Availability:
+Adapt to changing demands.
+Environment: ON-prem, Cloud,Hybrid, Multi-cloud
+Management: On-demand(ie GKE), Self mananged
+Scalability
+Security: Authentication 
+Access Management - RBAC - Authorization
+Policies
+Container Resource
+Choose Deployment Tools: 
+      Kubeadm
+      ClusterAPI
+      kops
+      Rancher
+      Portainer
+      kubespray: A composition of Ansible playbooks, inventory, provisioning tools, and domain knowledge for generic OS/Kubernetes clusters configuration management tasks)
+
+Container Runntimes:You need to install a container runtime into each node in the cluster so that Pods can run there. 
+      Containerd
+      CRI-O
+      Docker Engine
+      Mirantis Container Runtime
+
+
+The Linux kernel does not allow IPv4 packets to be routed between interfaces
+sysctl parameters, which are kernel parameters that can be modified at runtime, can be used to fine-tune network behavior and other system aspects within containers.
+The parameters cover various subsystems such as:  "sudo sysctl -a"
+      kernel (common prefix: kernel.)
+      networking (common prefix: net.)
+      virtual memory (common prefix: vm.)
+      MDADM (common prefix: dev.)
+      More subsystems are described in Kernel docs.
+Sysctls with no namespace are called node-level sysctls
+ consider nodes with special sysctl settings as tainted within a cluster.
+
+ENABLLE IPV4 packet forwarding using sysctl
+      # sysctl params required by setup, params persist across reboots
+      cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+      net.ipv4.ip_forward = 1
+      EOF
+      
+      # Apply sysctl params without reboot
+      sudo sysctl --system
+
+cgroup: cgroupfs , sysytemd
+control groups are used to constrain resources that are allocated to processes.
+
+Both the kubelet and the underlying container runtime need to interface with control groups to enforce resource management for pods and containers.
+and set resources such as cpu/memory requests and limits. To interface with control groups, the kubelet and the container runtime need to use the same cgroup driver and are configured the same.
+      apiVersion: kubelet.config.k8s.io/v1beta1
+      kind: KubeletConfiguration
+      ...
+      cgroupDriver: systemd
+
+CERTIFICATES Management:Kubernetes requires PKI certificates for authentication over TLS.
+kubeadm automatically generates certs if used for implementation.
