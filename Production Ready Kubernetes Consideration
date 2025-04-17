@@ -54,3 +54,43 @@ and set resources such as cpu/memory requests and limits. To interface with cont
 
 CERTIFICATES Management:Kubernetes requires PKI certificates for authentication over TLS.
 kubeadm automatically generates certs if used for implementation.
+
+Namespace: used for environment(dev,test,prod) isolation, permissions,Security (RBAC) & resource allocation
+
+kubernetes resources/objects used to deploy application include:
+   Pod : Does NOT Scale,short lifecycle, No Sellf-healing
+or    
+ controllerManagers:
+     a. Replication Controller
+            kubectl scale xxx
+     b. ReplicaSet
+            kubectl scale xxx
+     c. DaemonSet
+      Use a DaemonSet when it is important that a copy of a Pod always run on all or certain hosts, if the DaemonSet provides node-level functionality that allows other Pods to run correctly on that particular node.
+           running a cluster storage daemon on every node
+            running a logs collection daemon on every node
+            running a node monitoring daemon on every node
+            running a networking helper tool
+            .spec.template.spec.nodeSelector, .spec.template.spec.affinity
+      d.StatefulSets
+            kubectl scale xxx
+            Stable, unique network identifiers.
+            Stable, persistent storage.
+            Ordered, graceful deployment and scaling.
+            Ordered, automated rolling updates.
+      e.Deployment
+      Use a Deployment for stateless services, like frontends, where scaling up and down the number of replicas and rolling out updates are more important than controlling exactly which host the Pod runs on. 
+      A Deployment provides declarative updates for Pods and ReplicaSets.
+      Deployment Controller changes the actual state to the desired state at a controlled rate.
+       kubectl scale xxx
+     f. Volume
+     g. Job 
+
+Exposing/accessing applications = Service Discovery:
+    Service Types:
+    ClusterIP
+    NodePort
+    LoadBalancer
+    ExternalName  
+    ingress 
+    networkPolicy 
